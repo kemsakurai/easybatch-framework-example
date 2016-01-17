@@ -40,20 +40,32 @@ public class ArtistCsvRowMapper implements RecordMapper<Record<Artist>, Record<A
 
     public static class Result {
 
-        public String name;
-        public String familiarity;
-        public String hotttnesss;
+        private String name;
+        private String familiarity;
+        private String hotttnesss;
 
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            return sb.append("\"")
-                    .append(name)
-                    .append("\",\"")
-                    .append(familiarity)
-                    .append("\",\"")
-                    .append(hotttnesss)
-                    .append("\"")
-                    .toString();
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getFamiliarity() {
+            return familiarity;
+        }
+
+        public void setFamiliarity(String familiarity) {
+            this.familiarity = familiarity;
+        }
+
+        public String getHotttnesss() {
+            return hotttnesss;
+        }
+
+        public void setHotttnesss(String hotttnesss) {
+            this.hotttnesss = hotttnesss;
         }
     }
 }

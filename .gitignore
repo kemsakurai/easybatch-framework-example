@@ -35,5 +35,7 @@ bin
 *.log
 *.swp
 *.bak
+*.html
 *.csv
 /.nb-gradle/
+src/main/java/xyz/monotalk/easybatch/example/EchonestReader.java

@@ -8,6 +8,9 @@
  */
 
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'xyz.monotalk.easybatch.example.Main'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -21,6 +24,7 @@ dependencies {
     // easybatch-framework    
     compile 'org.easybatch:easybatch-core:4.0.0'
     compile 'org.easybatch:easybatch-tools:4.0.0'
+    compile 'org.easybatch:easybatch-flatfile:4.0.0'
     
     // echonest java api
     compile 'com.googlecode.jen-api:jen-api:4.x.p'

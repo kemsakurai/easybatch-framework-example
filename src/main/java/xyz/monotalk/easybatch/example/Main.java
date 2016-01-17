@@ -1,8 +1,13 @@
 package xyz.monotalk.easybatch.example;
 
+import java.beans.IntrospectionException;
+import java.io.FileWriter;
 import java.io.IOException;
 import org.easybatch.core.job.JobBuilder;
+import org.easybatch.core.job.JobReport;
 import org.easybatch.core.writer.FileRecordWriter;
+import org.easybatch.flatfile.DelimitedRecordMarshaller;
+import org.easybatch.tools.reporting.HtmlJobReportFormatter;
 
 /**
  * Main
@@ -11,16 +16,24 @@ import org.easybatch.core.writer.FileRecordWriter;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
-        System.out.println("start echonest-frame-work example");
+    public static void main(String[] args) throws IOException, IntrospectionException {
+        System.out.println(">>>>>>>start echonest-frame-work example");
 
         // Execute jobs
-        JobBuilder.aNewJob()
+        JobReport jobReport = JobBuilder.aNewJob()
                 .reader(new EchonestReader())
                 .mapper(new ArtistCsvRowMapper())
-                .writer(new FileRecordWriter("echonest_result.csv"))
+                .marshaller(new DelimitedRecordMarshaller(ArtistCsvRowMapper.Result.class, new String[]{"name", "familiarity", "hotttnesss"}))
+                .writer(new FileRecordWriter("./outputs/echonest_result.csv"))
                 .call();
 
-        System.out.println("end echonest-frame-work example");
+        // Output Reports
+        HtmlJobReportFormatter htmlJobReportFormatter = new HtmlJobReportFormatter();
+        String html = htmlJobReportFormatter.formatReport(jobReport);
+        try (FileWriter fw = new FileWriter("./outputs/job_report.html")) {
+            fw.write(html);
+        }
+
+        System.out.println(">>>>>>>end echonest-frame-work example");
     }
 }
